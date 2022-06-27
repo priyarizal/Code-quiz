@@ -25,6 +25,10 @@ body {
     box-shadow: 0 0 10px 2px;
 }
 
+.start-btn:hover {
+    border-color: aquamarine;
+}
+
 .btn-grid {
     display: grid;
     gap: 20px;
