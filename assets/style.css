@@ -44,3 +44,13 @@ body {
 .btn1:hover {
     border-color: aquamarine;
 }
+
+#timer {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+}
+
+#timer:hover {
+    background-color: mistyrose;
+}
