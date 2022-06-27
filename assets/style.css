@@ -49,8 +49,15 @@ body {
     position: absolute;
     top: 30px;
     right: 40px;
+    height: 30px;
 }
 
-#timer:hover {
+#timer:hover input {
     background-color: mistyrose;
+    height: 40px
+}
+
+#timer input {
+    height: 30px;
+
 }

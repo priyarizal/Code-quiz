@@ -9,6 +9,7 @@ function loadPage() {
     quizContainer.style.visibility = 'hidden'
     rightanswer.style.visibility = 'hidden'
     wronganswer.style.visibility = 'hidden'
+    endpage.style.visibility = 'hidden'
 
     //defining introtext, telling it to grab it & display this msg 
     var introText
@@ -167,5 +168,6 @@ const myQuestions = [
 //end the quiz
 //insert timer and trigger it to only reduce time when it gets a false answer
 //hide rightanswer text when user picks a wrong answer
-
+//calculate right answers and correspodning seconds remaining 
+//if users want to play again : store time 
 
