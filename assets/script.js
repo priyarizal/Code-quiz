@@ -115,8 +115,6 @@ function checkAnswerD(answer) {
 }
 
 
-
-
 // my questions and answers
 
 const myQuestions = [
@@ -163,5 +161,11 @@ const myQuestions = [
     }
 
 ];
+
+
+//things left to do: find a way to tell it to get the next question and next answer
+//end the quiz
+//insert timer and trigger it to only reduce time when it gets a false answer
+//hide rightanswer text when user picks a wrong answer
 
 
