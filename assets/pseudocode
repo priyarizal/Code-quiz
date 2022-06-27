@@ -1,0 +1,14 @@
+pseudocode for the last couple of things I've got left 
+
+//things left to do: find a way to tell it to get the next question and next answer
+ this must be a loop
+
+//end the quiz
+
+//insert timer and trigger it to only reduce time when it gets a false answer
+
+//hide rightanswer text or wronganswer text depending on users input
+
+//calculate right answers and corresponding seconds remaining 
+
+//if users want to play again : store seconds remaining
