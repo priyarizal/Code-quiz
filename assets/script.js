@@ -1,19 +1,25 @@
 
-//I defined and declared a function, then tiggered it to load the page with following sentence.
+//I defined and declared the loadPage function
 function loadPage() {
 
     var quizContainer
     quizContainer = document.querySelector("#quizcontainer")
-    quizContainer.style.visibility = 'hidden'
 
+    //I'm hiding the questions, options, rightanswer, & wronganswer from the user until the function is triggered
+    quizContainer.style.visibility = 'hidden'
+    rightanswer.style.visibility = 'hidden'
+    wronganswer.style.visibility = 'hidden'
+
+    //defining introtext, telling it to grab it & display this msg 
     var introText
     introText = document.querySelector("#introtext")
     introText.innerHTML = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds."
 
 }
-
+//this is triggering the function to loadPage
 loadPage()
 
+//this is storing my sequence of question
 var currentQuestion
 currentQuestion = 0
 
@@ -22,8 +28,10 @@ function startQuiz() {
     var quizContainer
     quizContainer = document.querySelector("#quizcontainer")
 
+    //making my quizcontainer visible that I hid it on my page
     quizContainer.style.visibility = 'visible'
 
+    //hiding my intro container that was visible when loading the page
     var introContainer
     introContainer = document.querySelector("#introcontainer");
     introContainer.style.visibility = 'hidden'
@@ -41,9 +49,13 @@ function getQuestions() {
     //deconstructing the above 'object' for clarity
     // const { question, answers, correctAnswer } = myQuestions[currentQuestion]
 
+
+
+    //telling it what question to show next
     currentQuestion = currentQuestion + 1
 
-    //assigning answers to their buttons
+
+    //assigning possible answers (options) to their buttons
 
     btn1 = document.querySelector("#btn1")
     btn1.innerText = myQuestions[currentQuestion]['answers']['a']
@@ -61,17 +73,51 @@ function getQuestions() {
 
 document.getElementById("start-btn").addEventListener("click", startQuiz);
 
-document.getElementById("btn1").addEventListener("click", checkAnswer);
-document.getElementById("btn2").addEventListener("click", checkAnswer);
-document.getElementById("btn3").addEventListener("click", checkAnswer);
-document.getElementById("btn4").addEventListener("click", checkAnswer);
+
+//checks the user's input
+document.getElementById("btn1").addEventListener("click", checkAnswerA);
+document.getElementById("btn2").addEventListener("click", checkAnswerB);
+document.getElementById("btn3").addEventListener("click", checkAnswerC);
+document.getElementById("btn4").addEventListener("click", checkAnswerD);
+
+//I'm assigning the correct answer to each question by telling it where to find the correct answer
+function checkAnswer(answer) {
+    console.log(answer)
+    myQuestions[currentQuestion]['correctAnswer']
+    console.log(myQuestions[currentQuestion]['correctAnswer'])
+    var correctAnswer = myQuestions[currentQuestion]['correctAnswer']
+
+    //I'm telling it what to display if user answers the right answer or wrong answer 
+    if (answer === correctAnswer) {
+        rightanswer.style.visibility = 'visible'
+    }
+    else if (answer != correctAnswer) {
+        wronganswer.style.visibility = 'visible'
+
+    }
+
+}
+
+function checkAnswerA(answer) {
+    checkAnswer("a")
+}
+
+function checkAnswerB(answer) {
+    checkAnswer("b")
+}
+
+function checkAnswerC(answer) {
+    checkAnswer("c")
+}
+
+function checkAnswerD(answer) {
+    checkAnswer("d")
+}
 
 
 
 
-
-
-//writing my questions
+// my questions and answers
 
 const myQuestions = [
     {
@@ -111,8 +157,11 @@ const myQuestions = [
             b: "other arrays",
             c: "Booleans",
             d: "All of the above"
-        }
+        },
+        correctAnswer: "d"
+
     }
+
 ];
 
 
