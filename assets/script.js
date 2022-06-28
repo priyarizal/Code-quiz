@@ -37,9 +37,15 @@ function startQuiz() {
     introContainer = document.querySelector("#introcontainer");
     introContainer.style.visibility = 'hidden'
 
+
+    updateTimer(timeleft)
     getQuestions()
 
+
 }
+
+document.getElementById("start-btn").addEventListener("click", startQuiz);
+
 
 function getQuestions() {
 
@@ -50,10 +56,6 @@ function getQuestions() {
     //deconstructing the above 'object' for clarity
     // const { question, answers, correctAnswer } = myQuestions[currentQuestion]
 
-
-
-    //telling it what question to show next
-    currentQuestion = currentQuestion + 1
 
 
     //assigning possible answers (options) to their buttons
@@ -70,9 +72,9 @@ function getQuestions() {
     btn1 = document.querySelector("#btn4")
     btn1.innerText = myQuestions[currentQuestion]['answers']['d']
 
-}
+    //telling it what question to show next
 
-document.getElementById("start-btn").addEventListener("click", startQuiz);
+}
 
 
 //checks the user's input
@@ -90,13 +92,20 @@ function checkAnswer(answer) {
 
     //I'm telling it what to display if user answers the right answer or wrong answer 
     if (answer === correctAnswer) {
-        rightanswer.style.visibility = 'visible'
+        // rightanswer.style.visibility = 'visible'
+        console.log('answercorrect')
     }
     else if (answer != correctAnswer) {
-        wronganswer.style.visibility = 'visible'
+        // wronganswer.style.visibility = 'visible'
+        timeleft -= 10;
+        console.log('answerincorrect')
 
     }
+    currentQuestion = currentQuestion + 1
 
+
+    updateTimer(timeleft);
+    getQuestions()
 }
 
 function checkAnswerA(answer) {
@@ -163,11 +172,19 @@ const myQuestions = [
 
 ];
 
+function updateTimer(time) {
+    document.querySelector("#timer-input").innerText = time;
 
-//things left to do: find a way to tell it to get the next question and next answer
-//end the quiz
-//insert timer and trigger it to only reduce time when it gets a false answer
-//hide rightanswer text when user picks a wrong answer
-//calculate right answers and correspodning seconds remaining 
+}
+
+var timeleft = 60;
+
+setInterval(function () {
+    timeleft -= 1
+    updateTimer(timeleft)
+}, 1000)
+
+
 //if users want to play again : store time 
+//end the quiz
 
