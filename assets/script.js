@@ -1,15 +1,17 @@
 
+var quizContainer
+
 //I defined and declared the loadPage function
 function loadPage() {
 
-    var quizContainer
     quizContainer = document.querySelector("#quizcontainer")
 
     //I'm hiding the questions, options, rightanswer, & wronganswer from the user until the function is triggered
-    quizContainer.style.visibility = 'hidden'
-    rightanswer.style.visibility = 'hidden'
-    wronganswer.style.visibility = 'hidden'
-    endpage.style.visibility = 'hidden'
+    quizContainer.style.display = 'none'
+    // rightanswer.style.hidden='none'
+    // wronganswer.style.hidden='none'
+    endpage.style.display = 'none'
+
 
     //defining introtext, telling it to grab it & display this msg 
     var introText
@@ -30,28 +32,47 @@ function startQuiz() {
     quizContainer = document.querySelector("#quizcontainer")
 
     //making my quizcontainer visible that I hid it on my page
-    quizContainer.style.visibility = 'visible'
+    quizContainer.style.display = 'block'
 
     //hiding my intro container that was visible when loading the page
     var introContainer
     introContainer = document.querySelector("#introcontainer");
-    introContainer.style.visibility = 'hidden'
+    introContainer.style.display = 'none'
+
+    startTimer()
+    // updateTimer(timeleft)
+    getNextQuestion()
+}
 
 
-    updateTimer(timeleft)
-    getQuestions()
+var timeleft = 60;
+var myTimer;
 
+function startTimer() {
+    myTimer = setInterval(function () {
+        timeleft -= 1
+        updateTimer(timeleft)
+    }, 1000)
+};
 
+function updateTimer(time) {
+    document.querySelector("#timer-input").innerText = time;
+    if (time === 0) {
+        alert("Quiz over! You're out of time!");
+        clearInterval(myTimer);
+    }
 }
 
 document.getElementById("start-btn").addEventListener("click", startQuiz);
 
 
-function getQuestions() {
+var question
+function getNextQuestion() {
 
     //displaying question 
     quiz = document.querySelector("#quiz")
     quiz.innerHTML = myQuestions[currentQuestion]['question']
+
 
     //deconstructing the above 'object' for clarity
     // const { question, answers, correctAnswer } = myQuestions[currentQuestion]
@@ -84,6 +105,9 @@ document.getElementById("btn3").addEventListener("click", checkAnswerC);
 document.getElementById("btn4").addEventListener("click", checkAnswerD);
 
 //I'm assigning the correct answer to each question by telling it where to find the correct answer
+
+var correctAnswer;
+
 function checkAnswer(answer) {
     console.log(answer)
     myQuestions[currentQuestion]['correctAnswer']
@@ -103,9 +127,39 @@ function checkAnswer(answer) {
     }
     currentQuestion = currentQuestion + 1
 
+    console.log(currentQuestion, myQuestions.length)
 
-    updateTimer(timeleft);
-    getQuestions()
+    // last question, end the quiz
+    if (currentQuestion === myQuestions.length) {
+        endQuiz()
+        console.log("i am here")
+    } else {
+        getNextQuestion()
+    }
+
+    console.log(currentQuestion)
+
+}
+
+// var endQuiz
+// endQuiz = document.querySelector("#endpage")
+// endQuiz.innerHTML = "All done"
+
+
+function endQuiz() {
+    clearInterval(myTimer);
+    const score = timeleft
+
+    endpage.style.display = 'block'
+    quizContainer.style.display = 'none'
+    document.querySelector("#timer").style.display = 'none'
+    document.querySelector("#score").innerHTML = score
+
+
+    console.log(score)
+
+
+
 }
 
 function checkAnswerA(answer) {
@@ -123,6 +177,7 @@ function checkAnswerC(answer) {
 function checkAnswerD(answer) {
     checkAnswer("d")
 }
+
 
 
 // my questions and answers
@@ -171,18 +226,6 @@ const myQuestions = [
     }
 
 ];
-
-function updateTimer(time) {
-    document.querySelector("#timer-input").innerText = time;
-
-}
-
-var timeleft = 60;
-
-setInterval(function () {
-    timeleft -= 1
-    updateTimer(timeleft)
-}, 1000)
 
 
 //if users want to play again : store time 
