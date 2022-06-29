@@ -77,8 +77,6 @@ function getNextQuestion() {
     //deconstructing the above 'object' for clarity
     // const { question, answers, correctAnswer } = myQuestions[currentQuestion]
 
-
-
     //assigning possible answers (options) to their buttons
 
     btn1 = document.querySelector("#btn1")
@@ -153,13 +151,10 @@ function endQuiz() {
     endpage.style.display = 'block'
     quizContainer.style.display = 'none'
     document.querySelector("#timer").style.display = 'none'
-    document.querySelector("#score").innerHTML = score
+    document.querySelector("#score").innerHTML = timeleft
 
 
     console.log(score)
-
-
-
 }
 
 function checkAnswerA(answer) {
